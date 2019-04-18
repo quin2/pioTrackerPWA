@@ -1,0 +1,23 @@
+use rabbitMQ with celery:
+	good, but requires process calls to different machines
+	still have problem of how to run something every x seconds
+	and its still only ONE task
+
+Option B:
+	make bash script that runs then sleeps every 10s
+	write to common output file that is scrubbed and read by API
+
+option C:
+	Like B, but with database that's production ready running in background! 
+
+use #!/bin/env bash for linux...
+change python3 to python
+
+NOW TIME TO DEPLOY!!!!
+
+Sidestep complex stuff....
+
+run nginx, serve json file from var/www
+run script in background!!!
+
+chromedriver runs WAY faster than firefox ever did...

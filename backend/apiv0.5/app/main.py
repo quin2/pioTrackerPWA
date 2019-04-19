@@ -4,7 +4,7 @@ from flask import Flask, jsonify, Response
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
 from time import sleep
 from random import randint
 from selenium.webdriver.support.ui import WebDriverWait
@@ -37,9 +37,10 @@ def index():
 @app.route('/api/v0/all', methods=['GET'])
 def getBusList():
     options = Options()
-    options.headless = True
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
 
-    browser = webdriver.Firefox(options=options)
+    browser = webdriver.Chrome(chrome_options=options)
     url = "https://us3.cloud.samsara.com/fleet/viewer/4wl8uKYptOmElqD5Z2ju"
     print("browser session starting with id: " + browser.session_id)
 

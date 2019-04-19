@@ -1,0 +1,26 @@
+FROM tiangolo/uwsgi-nginx-flask:latest
+
+#get stuff 
+RUN apt-get update -y
+RUN apt-get install wget unzip
+
+#get chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
+
+#get chromedriver 
+RUN wget https://chromedriver.storage.googleapis.com/73.0.3683.68/chromedriver_linux64.zip
+RUN unzip chromedriver_linux64.zip
+RUN rm chromedriver_linux64.zip
+RUN chmod +x chromedriver
+RUN cp chromedriver /usr/local/bin/
+
+#get selenium
+RUN pip install selenium
+
+#don't serve index.html
+ENV STATIC_INDEX 0
+
+# Add app
+COPY ./app /app
+WORKDIR /app

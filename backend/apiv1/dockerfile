@@ -1,0 +1,26 @@
+FROM tiangolo/uwsgi-nginx-flask:latest
+
+#get firefox
+RUN apt-get update -y
+RUN apt-get install -y iceweasel wget
+
+#get geckodriver for Firefox
+RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz
+RUN tar -xvzf geckodriver-v0.24.0-linux64.tar.gz
+RUN rm geckodriver-v0.24.0-linux64.tar.gz
+RUN chmod +x geckodriver
+RUN cp geckodriver /usr/local/bin/
+
+#get selenium
+RUN pip install selenium
+
+#run background script
+#CMD /app/task.sh &
+
+#don't serve index.html
+ENV STATIC_INDEX 0
+
+# Add app
+COPY ./app /app
+WORKDIR /app
+

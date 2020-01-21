@@ -6,6 +6,13 @@ import './App.css';
 
 const url = 'http://174.129.44.93/api/v0/all';
 
+const ShattuckStop = {
+  latitude: 45.510359,
+  longitude: -122.684561
+};
+
+
+
 
 class App extends Component {
   constructor(props) {
@@ -15,6 +22,8 @@ class App extends Component {
       location: []
     }
   }
+  
+
 
 
   componentWillMount() { 
